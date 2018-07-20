@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         euphist
-// @version      1.0.1
+// @version      1.0.2
 // @namespace    leet.nu
 // @description  bash like history support for Heim.
 // @author       Kalium, Xyzzy
@@ -8,7 +8,7 @@
 // @include      https://euphoria.leet.nu/room/*
 // @grant        none
 // @updateUrl    https://raw.githubusercontent.com/kaliumxyz/euphist/master/main.js
-// @downloadUrl    https://raw.githubusercontent.com/kaliumxyz/euphist/master/main.js
+// @downloadUrl  https://raw.githubusercontent.com/kaliumxyz/euphist/master/main.js
 // ==/UserScript==
 
 (() => {
@@ -32,11 +32,11 @@
 		}
 
 		euphist.keyDownEvent = ev => {
-			let input = document.querySelector('.entry-text');
+			if(ev.ctrlKey) {
+				let input = document.querySelector('.entry-text');
 
-			if(input)
-				if(input.value === '' || input.value === euphist.msgStack[euphist.msgIndex])
-					if(ev.ctrlKey) {
+				if(input)
+					if(input.value === '' || input.value === euphist.msgStack[euphist.msgIndex])
 						switch(ev.keyCode) {
 								//up
 							case 38:
@@ -53,7 +53,7 @@
 								}
 								break;
 						}
-					}
+			}
 		}
 
 		document.addEventListener('keydown', euphist.keyDownEvent);
